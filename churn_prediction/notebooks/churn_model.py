@@ -8,9 +8,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score
 
 # If using the synthetic dataset
-df = pd.read_csv('C:\\Users\\HP\\Desktop\\zomato-genai-project\\zomato_churn_synthetic.csv')
+df = pd.read_csv('C:\\Users\\HP\\Desktop\\zomato-genai-project\\churn_prediction\\data\\zomato_churn_synthetic.csv')
 print(df.head())
-
 df['membership_status'] = df['membership_status'].fillna('None')
 
 
@@ -87,6 +86,10 @@ X_test_copy['user_id'] = df.loc[X_test.index, 'user_id']
 # Visual bar chart of top 5 churners
 plt.figure(figsize=(8, 5))
 top_churners = X_test_copy.sort_values(by='prob_churn', ascending=False).head(5)
+
+top_churners[['user_id', 'prob_churn']].to_csv("C:\\Users\\HP\\Desktop\\zomato-genai-project\\churn_prediction\\data\\top5_churn_risk_users.csv", index=False)
+print("✅ Saved: top5_churn_risk_users.csv in data folder")
+
 sns.barplot(x='prob_churn', y='user_id', data=top_churners, palette='Reds_r')
 plt.xlabel("Churn Probability")
 plt.ylabel("User ID")
