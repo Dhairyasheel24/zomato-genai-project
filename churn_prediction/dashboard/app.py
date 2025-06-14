@@ -15,8 +15,10 @@ st.title("🍽️ Zomato GenAI Churn Dashboard")
 st.markdown("---")
 
 # Sidebar Branding
-st.sidebar.image("churn_prediction/assets/zomato_logo.png", width=150)
-st.sidebar.title("Zomato GenAI Churn Lab")
+from PIL import Image
+logo = Image.open("churn_prediction/assets/zomato_logo.png")
+st.sidebar.image(logo, width=150)
+
 
 # --- Load fixed Zomato dataset ---
 @st.cache_data
