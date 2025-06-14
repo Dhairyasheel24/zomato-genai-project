@@ -15,7 +15,7 @@ st.title("🍽️ Zomato GenAI Churn Dashboard")
 st.markdown("---")
 
 # Sidebar Branding
-st.sidebar.image("C:/Users/HP/Desktop/zomato-genai-project/churn_prediction/assests/Zomato_logo.png", width=150)
+st.sidebar.image("churn_prediction/assets/zomato_logo.png", width=150)
 st.sidebar.title("Zomato GenAI Churn Lab")
 
 # --- Load fixed Zomato dataset ---
