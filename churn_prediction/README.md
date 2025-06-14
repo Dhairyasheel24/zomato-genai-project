@@ -1,20 +1,19 @@
-# Use Case: Churn Prediction + Retention Offers
+# 🍽️ Zomato GenAI – Churn Prediction & Retention Strategy
 
-👤 **User**: Zomato CX Manager  
-💬 **Problem**: Users silently stop ordering; hard to recover lost customers  
-🎯 **Goal**: Identify likely-to-churn users and intervene with personalized offers  
-🧠 **AI Role**:  
-- ML model (Logistic Regression/XGBoost) to predict churn  
-- GPT to auto-generate offer messages  
+### 👤 Use Case: Zomato CX Manager  
+Many users silently stop ordering without formally leaving. Identifying such users and proactively reaching out with personalized offers can significantly reduce churn and boost revenue.
 
-📈 **Impact**:  
-- Reduce user churn by 10–20%  
-- Increase monthly retention by +5%
+---
 
-🛠️ **Tech Stack**:  
-- Python, Pandas, Scikit-learn, OpenAI GPT API, Streamlit
+## 🎯 Objective  
+Use **Machine Learning** and **Generative AI (GPT)** to:
+- Predict customers most likely to churn
+- Generate personalized retention messages
+- Display everything on an interactive dashboard
 
-📊 **KPIs**:  
-- Predicted Churn Accuracy (AUC)  
-- Offer Redemption Rate  
-- Retention after campaign
+---
+
+## 🧠 AI-Powered Workflow
+
+| Module                | Role
+
