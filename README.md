@@ -52,7 +52,7 @@ Use Machine Learning and Generative AI (GPT) to:
 ---
 
 ## 🗂️ Project Structure (Partial)
-zomato-genai-project/
+```zomato-genai-project/
 │
 ├── churn_prediction/ # Main project logic
 │ ├── data/ # Input datasets and prediction outputs
@@ -73,4 +73,4 @@ zomato-genai-project/
 ├── reports/ # Optional evaluation results
 ├── README.md # Project overview and instructions
 ├── requirements.txt # Python dependencies
-└── .devcontainer/ # Optional dev container setup
+└── .devcontainer/ # Optional dev container setup```
