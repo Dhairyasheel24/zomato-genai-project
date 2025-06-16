@@ -52,3 +52,25 @@ Use Machine Learning and Generative AI (GPT) to:
 ---
 
 ## 🗂️ Project Structure (Partial)
+zomato-genai-project/
+│
+├── churn_prediction/ # Main project logic
+│ ├── data/ # Input datasets and prediction outputs
+│ │ ├── zomato_churn_synthetic.csv
+│ │ ├── top5_churn_risk_users.csv
+│ │ └── top5_with_gpt_offers.csv
+│ │
+│ ├── dashboard/ # Streamlit dashboard application
+│ │ └── app.py
+│ │
+│ ├── apps/ # GPT-powered offer generator logic
+│ │ └── hf_offer_generator.py
+│ │
+│ ├── assets/ # Visuals and brand assets
+│ └── Zomato_logo.png
+│
+├── notebooks/ # Jupyter notebooks (if any)
+├── reports/ # Optional evaluation results
+├── README.md # Project overview and instructions
+├── requirements.txt # Python dependencies
+└── .devcontainer/ # Optional dev container setup
