@@ -1,76 +1,85 @@
-# 🍽️ Zomato GenAI – Churn Prediction & Retention Strategy
+# 🍽️ Zomato GenAI – Churn Prediction & Retention System
 
-## 👤 Use Case: Zomato CX Manager  
-Many users silently stop ordering without formally leaving. Identifying such users and proactively reaching out with personalized offers can significantly reduce churn and boost revenue.
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
+![XGBoost](https://img.shields.io/badge/ML-XGBoost-orange)
+![GenAI](https://img.shields.io/badge/GenAI-HuggingFace-yellow)
+![Streamlit](https://img.shields.io/badge/Dashboard-Streamlit-red)
 
----
+> **"Prediction is just the first step. Prevention is the goal."**
 
-## 🎯 Objective  
-Use Machine Learning and Generative AI (GPT) to:
-- 🔍 Predict customers most likely to churn  
-- 📩 Generate personalized retention messages  
-- 📊 Display everything on an interactive Streamlit dashboard  
-
----
-
-## 🧠 AI-Powered Workflow
-
-| Module             | Role                                                                 |
-|--------------------|----------------------------------------------------------------------|
-| 🔍 ML Model        | Churn prediction using Logistic Regression / RandomForest / XGBoost |
-| 🤖 GPT Integration | Generates friendly 2-line messages with discounts and urgency       |
-| 📊 Streamlit UI    | Interactive dashboard to explore churn and AI-generated insights    |
+### 👤 Use Case: Zomato Customer Experience (CX) Manager
+Many users silently stop ordering without formally cancelling their accounts. Identifying these "silent churners" and proactively reaching out with **personalized, profitable offers** can significantly reduce churn and boost Customer Lifetime Value (LTV).
 
 ---
 
-## 💡 Business Impact
-- 🔻 10–20% reduction in user churn  
-- 📈 +5% improvement in monthly retention  
-- ✉️ 100% automated messaging for re-engagement  
+## 🎯 Objective
+This project is an **End-to-End Retention Pipeline** that goes beyond simple prediction. It uses Machine Learning to identify risk and Generative AI to automate intervention.
+
+1.  **🔍 Predict:** Identify customers most likely to churn using **XGBoost**.
+2.  **💰 Optimize:** Dynamically tune decision thresholds based on **Net Profit** (LTV vs. Cost), not just accuracy.
+3.  **📩 Intervene:** Generate personalized push notifications using **LLMs (Phi-3.5/Qwen)**.
+4.  **🛡️ Resilient:** Implements a **Circuit Breaker Pattern** to ensure marketing pipelines never fail even if AI APIs go down.
+
+---
+
+## 🧠 Architecture & Workflow
+
+| Module | Technology | Role |
+| :--- | :--- | :--- |
+| **Prediction Engine** | **XGBoost Classifier** | High-performance churn probability scoring on imbalanced data. |
+| **Explainability** | **Logistic Regression** | Provides "Directional" insights (e.g., *Why* are they leaving?). |
+| **GenAI Agent** | **Hugging Face API** | Generates context-aware retention offers (e.g., "We miss you! 50% off"). |
+| **Dashboard** | **Streamlit** | Interactive UI for stakeholders to simulate profit scenarios. |
+
+---
+
+## 💡 Key Features (The "Why" Behind the Code)
+
+### 1. 💰 Profit-First Optimization
+Most models optimize for Accuracy. This project optimizes for **Money**.
+* We calculate the trade-off between **saving a customer (LTV ₹500)** and **wasting a coupon (Cost ₹50)**.
+* The dashboard plots a **Profitability Curve** to find the optimal decision threshold (usually ~0.35 instead of the default 0.5).
+
+### 2. 🛡️ GenAI Circuit Breaker
+Reliance on external APIs (like OpenAI/Hugging Face) is risky in production.
+* **Primary:** Calls the live LLM (Microsoft Phi-3.5) for fresh content.
+* **Fallback:** If the API times out or fails (Error 503), the system automatically switches to a deterministic **"Backup Library"** of high-converting offers.
+* **Result:** 100% Uptime Guarantee for the marketing pipeline.
+
+### 3. 📉 Business Confusion Matrix
+We redefined standard ML metrics into business terms for stakeholders:
+* **True Positive:** ✅ "Saved Customer" (Revenue Gained)
+* **False Positive:** 💸 "Wasted Budget" (Coupon Cost Lost)
+* **False Negative:** 📉 "Lost Revenue" (The most expensive mistake)
 
 ---
 
 ## 🛠️ Tech Stack
-- **Languages/ML:** Python, Pandas, Scikit-learn, XGBoost  
-- **Visualization:** Plotly, Matplotlib, Seaborn  
-- **GenAI:** Hugging Face Inference API (Free GPT model)  
-- **Frontend:** Streamlit  
-- **Deployment:** GitHub + Streamlit Cloud  
+
+* **Core:** Python, Pandas, NumPy
+* **Machine Learning:** Scikit-learn, XGBoost (with `scale_pos_weight` for class imbalance)
+* **Generative AI:** Hugging Face Inference API (Phi-3.5, Qwen 2.5)
+* **Visualization:** Plotly (Interactive Charts), Matplotlib
+* **Web App:** Streamlit
 
 ---
 
-## 📊 Key Metrics (KPIs)
-- ✅ ROC AUC Score for churn prediction  
-- 📩 GPT offer generation coverage for top churn-risk users  
-- 🔁 Repeat order / redemption rate (future tracking)  
+## 📊 Project Structure
 
----
-
-## 🚀 Live Demo  
-🔗 [Zomato GenAI Streamlit App](https://dhairyasheel24-zomato-genai-churn-predictiondashboardapp-a6cphk.streamlit.app/)
-
----
-
-## 🗂️ Project Structure (Partial)
-```zomato-genai-project/
+```bash
+├── churn_prediction/
+│   ├── data/                       # Synthetic datasets & generated offers
+│   │   ├── zomato_churn_synthetic.csv
+│   │   ├── top5_churn_risk_users.csv
+│   │   └── top5_with_gpt_offers.csv
+│   │
+│   ├── dashboard/                  # Interactive Streamlit App
+│   │   └── app.py                  # MAIN DASHBOARD SCRIPT
+│   │
+│   ├── apps/                       # Background Jobs
+│   │   └── hf_offer_generator.py   # GenAI Script (with Circuit Breaker)
+│   │
+│   └── models/                     # (Optional) Saved .pkl models
 │
-├── churn_prediction/ # Main project logic
-│ ├── data/ # Input datasets and prediction outputs
-│ │ ├── zomato_churn_synthetic.csv
-│ │ ├── top5_churn_risk_users.csv
-│ │ └── top5_with_gpt_offers.csv
-│ │
-│ ├── dashboard/ # Streamlit dashboard application
-│ │ └── app.py
-│ │
-│ ├── apps/ # GPT-powered offer generator logic
-│ │ └── hf_offer_generator.py
-│ │
-│ ├── assets/ # Visuals and brand assets
-│ └── Zomato_logo.png
-│
-├── notebooks/ # Jupyter notebooks (if any)
-├── reports/ # Optional evaluation results
-├── README.md # Project overview and instructions
-├── requirements.txt # Python dependencies
-└── .devcontainer/ # Optional dev container setup```
+├── requirements.txt                # Dependencies
+└── README.md                       # Documentation
